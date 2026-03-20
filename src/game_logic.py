@@ -1,15 +1,18 @@
 import random
 
 class GameLogic:
+    # Inisialisasi permainan
     def __init__(self):
         self.reset_game()
         
+    # Reset permainan ke kondisi awal
     def reset_game(self):
         self.angka_rahasia = random.randint(1, 10)
         self.kesempatan = 3
         self.tebakan_sebelumnya = []
         self.status = "bermain"  # "bermain", "menang", "kalah"
-        
+
+    # Proses tebakan pemain    
     def tebak_angka(self, angka):
         if self.status != "bermain":
             return {"status": self.status, "pesan": "Permainan sudah selesai!"}
@@ -44,6 +47,7 @@ class GameLogic:
                     "kesempatan": self.kesempatan
                 }
     
+    # Mendapatkan status permainan saat ini
     def get_game_state(self):
         return {
             "angka_rahasia": self.angka_rahasia,

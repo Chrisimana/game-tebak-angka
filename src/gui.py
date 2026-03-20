@@ -5,9 +5,10 @@ from history_manager import HistoryManager
 import random
 
 class TebakAngkaApp:
+    # Inisialisasi aplikasi
     def __init__(self, root):
         self.root = root
-        self.root.title("Permainan Tebak Angka")
+        self.root.title("Game Tebak Angka")
         self.root.geometry("700x500")
         self.root.resizable(False, False)
         self.root.configure(bg="#f0f0f0")
@@ -28,7 +29,8 @@ class TebakAngkaApp:
         
         self.setup_ui()
         self.update_display()
-        
+
+    # Setup UI   
     def setup_ui(self):
         # Header
         header_frame = tk.Frame(self.root, bg=self.colors["dark"], height=80)
@@ -37,7 +39,7 @@ class TebakAngkaApp:
         
         title_label = tk.Label(
             header_frame, 
-            text="🎯 Permainan Tebak Angka 🎯", 
+            text="🎯 Game Tebak Angka 🎯", 
             font=("Arial", 18, "bold"),
             fg="white",
             bg=self.colors["dark"]
@@ -206,13 +208,14 @@ class TebakAngkaApp:
         
         footer_label = tk.Label(
             footer_frame,
-            text="Dibuat dengan ❤️ - Permainan Tebak Angka Versi Super & Keren",
+            text="Game Tebak Angka",
             font=("Arial", 8),
             fg="white",
             bg=self.colors["dark"]
         )
         footer_label.pack(expand=True)
         
+    # Proses tebakan pemain
     def proses_tebakan(self):
         try:
             angka = int(self.entry_var.get())
@@ -244,13 +247,15 @@ class TebakAngkaApp:
             
         except ValueError:
             messagebox.showerror("Error", "Masukkan angka yang valid!")
-            
+
+    # Reset permainan 
     def reset_game(self):
         self.game.reset_game()
         self.tebak_button.config(state=tk.NORMAL)
         self.entry_var.set("")
         self.update_display()
-        
+
+    # Update tampilan UI berdasarkan status permainan dan history    
     def update_display(self):
         # Update kesempatan
         state = self.game.get_game_state()

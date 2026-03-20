@@ -3,11 +3,13 @@ import os
 from datetime import datetime
 
 class HistoryManager:
+    # Inisialisasi history manager
     def __init__(self, filename="history_tebak_angka.json"):
         self.filename = filename
         self.history = []
         self.load_history()
-        
+
+    # Load history dari file JSON    
     def load_history(self):
         if os.path.exists(self.filename):
             try:
@@ -15,14 +17,16 @@ class HistoryManager:
                     self.history = json.load(file)
             except (json.JSONDecodeError, IOError):
                 self.history = []
-                
+
+    # Simpan history ke file JSON            
     def save_history(self):
         try:
             with open(self.filename, 'w') as file:
                 json.dump(self.history, file, indent=4)
         except IOError:
             print("Gagal menyimpan history")
-            
+
+    # Tambahkan record permainan ke history       
     def add_game_record(self, status, tebakan, kesempatan_terpakai):
         record = {
             "tanggal": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -33,10 +37,12 @@ class HistoryManager:
         }
         self.history.append(record)
         self.save_history()
-        
+
+    # Dapatkan daftar permainan terbaru dari history  
     def get_recent_games(self, count=5):
         return self.history[-count:] if self.history else []
-        
+
+    # Dapatkan statistik permainan dari history   
     def get_statistics(self):
         if not self.history:
             return {"total_game": 0, "menang": 0, "kalah": 0, "rata_rata_tebakan": 0}
