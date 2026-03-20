@@ -251,36 +251,6 @@ graph TD
     AA --> AE[Update Permainan Terakhir]
 ```
 
-### Diagram Alur Game Logic
-
-```mermaid
-graph TD
-    A[reset_game] --> B[angka_rahasia = random(1-10)]
-    B --> C[kesempatan = 3]
-    C --> D[tebakan_sebelumnya = []]
-    D --> E[status = "bermain"]
-    
-    F[tebak_angka(angka)] --> G{status == "bermain"?}
-    G -->|Tidak| H[Return status selesai]
-    
-    G -->|Ya| I{1 <= angka <= 10?}
-    I -->|Tidak| J[Return error]
-    
-    I -->|Ya| K[tebakan_sebelumnya.append(angka)]
-    K --> L{angka == angka_rahasia?}
-    
-    L -->|Ya| M[status = "menang"]
-    M --> N[Return menang]
-    
-    L -->|Tidak| O[kesempatan -= 1]
-    O --> P{kesempatan == 0?}
-    
-    P -->|Ya| Q[status = "kalah"]
-    Q --> R[Return kalah]
-    
-    P -->|Tidak| S[Return salah dengan petunjuk]
-```
-
 ### Penjelasan File
 
 | File | Fungsi |
